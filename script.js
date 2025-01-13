@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tasks.forEach(task => {
             taskList.appendChild(createTaskElement(task));
         });
-        clearCompletedBtn.style.display = tasks.some(task => task.completed) ? 'block' : 'none';
+        clearCompletedBtn.style.display = tasks.some(task => task.completed) ? 'block' : 'none'
     };
 
     renderTasks();
