@@ -1,4 +1,10 @@
 :root {
+    /* Dark Theme */
+    --color-background-dark: #1a1a1a;
+    --color-text-dark: #e5e5e5;
+    --color-white-dark: #2d2d2d;
+    --shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.3);
+
     /* Colors */
     --color-primary: #3b82f6;
     --color-primary-dark: #2563eb;
@@ -44,8 +50,28 @@ body {
     padding: 0 var(--spacing-md);
 }
 
+.dark-theme {
+    --color-background: var(--color-background-dark);
+    --color-text: var(--color-text-dark);
+    --color-white: var(--color-white-dark);
+    --color-primary-darker: #9aaff5;
+    --shadow: var(--shadow-dark);
+    color: var(--color-text-dark);
+}
+
 header {
     margin-bottom: var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    padding: var(--spacing-xs);
+    cursor: pointer;
 }
 
 h1 {
@@ -75,7 +101,7 @@ input[type="text"] {
 button {
     padding: var(--spacing-sm) var(--spacing-md);
     background-color: var(--color-primary);
-    color: var(--color-white);
+    color: #ffffff !important;
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -101,6 +127,7 @@ button:hover {
 .task-buttons {
     display: flex;
     gap: var(--spacing-sm);
+    flex-wrap: wrap;
 }
 
 .task-item {
@@ -120,21 +147,22 @@ button:hover {
 }
 
 .done-btn {
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-primary);
+    color: var(--color-white);
 }
 
 .done-btn:hover {
     background-color: var(--color-primary-darker);
 }
 
+
 .delete-btn {
-    background-color: var(--color-white);
-    color: var(--color-danger);
-    border: var(--border-width) solid var(--color-danger);
+    background-color: var(--color-danger);
+    color: #ffffff !important;
 }
 
 .edit-btn {
-    background-color: var(--color-primary-darker);
+    background-color: var(--color-primary);
     color: var(--color-white);
 }
 
@@ -151,9 +179,17 @@ button:hover {
     font-family: var(--font-family);
 }
 
+.task-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    width: 100%;
+}
+
 .task-text {
     flex: 1;
-    cursor: pointer;
+    min-width: 200px;
+    word-break: break-word;
 }
 
 .task-item.completed .task-text {

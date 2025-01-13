@@ -3,6 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const addTaskButton = document.getElementById('add-task');
     const taskList = document.getElementById('task-list');
     const errorMessage = document.getElementById('error-message');
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('theme');
+
+    if (storedTheme) {
+        document.body.classList.toggle('dark-theme', storedTheme === 'dark');
+        themeToggle.textContent = storedTheme === 'dark' ? '☀️' : '🌙';
+    } else if (prefersDark) {
+        document.body.classList.add('dark-theme');
+        themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        const isDark = document.body.classList.contains('dark-theme');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
 
     // clear all tasks that are completed
     const clearCompletedBtn = document.createElement('button');
@@ -58,13 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.className = `task-item ${task.completed ? 'completed' : ''}`;
         li.innerHTML = `
+        <div class="task-content">
             <span class="task-text" data-id="${task.id}">${task.text}</span>
-             <div class="task-buttons">
+            <div class="task-buttons">
                 <button class="edit-btn">Edit</button>
                 <button class="done-btn">${task.completed ? 'Undo' : 'Mark as Done'}</button>
-            <button class="delete-btn">Delete</button>
+                <button class="delete-btn">Delete</button>
+            </div>
         </div>
-        `;
+    `;
 
         // edit task
         li.querySelector('.edit-btn').addEventListener('click', () => {
@@ -88,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 taskText.textContent = task.text;
             }
+            input.addEventListener('blur', finishEditing);
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') finishEditing();
+            });
         });
 
         // mark task as done
