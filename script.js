@@ -9,9 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
         li.className = 'task-item';
         li.innerHTML = `
             <span class="task-text">${text}</span>
+            <button class="done-btn">Mark as Done</button>
             <button class="delete-btn">Delete</button>
         `;
 
+        // mark task as done
+        li.querySelector('.done-btn').addEventListener('click', (e) => {
+            li.classList.toggle('completed');
+            e.target.textContent = li.classList.contains('completed') ? 'Undo' : 'Mark as Done';
+        });
         // delete task
         li.querySelector('.delete-btn').addEventListener('click', () => {
             li.remove();
