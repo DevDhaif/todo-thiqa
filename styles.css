@@ -1,3 +1,31 @@
+:root {
+    /* Colors */
+    --color-primary: #3b82f6;
+    --color-primary-dark: #2563eb;
+    --color-primary-darker: #1e40af;
+    --color-danger: #f87171;
+    --color-danger-hover: #f8717120;
+    --color-background: #f8fafc;
+    --color-text: #1e293b;
+    --color-white: #fff;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.8rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+
+    /* Border */
+    --border-radius: 4px;
+    --border-width: 2px;
+
+    /* Shadow */
+    --shadow: 0 2px 4px rgba(29, 78, 216, 0.1);
+
+    /* Transitions */
+    --transition-default: background-color 0.2s ease;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,30 +34,30 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: var(--color-background);
+    color: var(--color-text);
 }
 
 .container {
     max-width: 600px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    margin: var(--spacing-lg) auto;
+    padding: 0 var(--spacing-md);
 }
 
 header {
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 h1 {
-    color: #2196f3;
+    color: var(--color-primary-darker);
     font-size: 2rem;
     text-align: center;
 }
 
 .add-task {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
 .input-container {
@@ -38,33 +66,57 @@ h1 {
 
 input[type="text"] {
     width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #2196f3;
-    border-radius: 4px;
+    padding: var(--spacing-sm);
+    border: var(--border-width) solid var(--color-primary);
+    border-radius: var(--border-radius);
     font-size: 1rem;
 }
 
 button {
-    padding: 0.8rem 1.2rem;
-    background-color: #2196f3;
-    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-primary);
+    color: var(--color-white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     font-size: 1rem;
+    transition: var(--transition-default);
 }
 
 button:hover {
-    background-color: #1976d2;
+    background-color: var(--color-primary-dark);
 }
 
 .task-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: white;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--color-white);
+    margin-bottom: var(--spacing-xs);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.done-btn {
+    background-color: var(--color-primary-dark);
+}
+
+.done-btn:hover {
+    background-color: var(--color-primary-darker);
+}
+
+.delete-btn {
+    background-color: var(--color-white);
+    color: var(--color-danger);
+    border: var(--border-width) solid var(--color-danger);
+}
+
+.delete-btn:hover {
+    background-color: var(--color-danger-hover);
 }
