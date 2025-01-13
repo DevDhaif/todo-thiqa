@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const addTaskButton = document.getElementById('add-task');
     const taskList = document.getElementById('task-list');
+    const errorMessage = document.getElementById('error-message');
 
     // clear all tasks that are completed
     const clearCompletedBtn = document.createElement('button');
@@ -12,6 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // get tasks from localStorage
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
+    // Show error message
+    const showError = () => {
+        errorMessage.style.display = 'block';
+        taskInput.classList.add('invalid');
+
+        // Hide error after 3 seconds
+        setTimeout(() => {
+            hideError();
+        }, 3000);
+    };
+
+    // Hide error message
+    const hideError = () => {
+        errorMessage.style.display = 'none';
+        taskInput.classList.remove('invalid');
+    };
+
     // save tasks to localStorage
     const saveTasks = () => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -21,6 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // add new task
     const addTask = (text) => {
+        if (!text.trim()) {
+            showError();
+            return;
+        }
+        hideError();
         const task = {
             id: Date.now(),
             text: text,
@@ -58,10 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return li;
     };
 
+    // hide error when user typing
+    taskInput.addEventListener('input', hideError);
+
     addTaskButton.addEventListener('click', () => {
         const text = taskInput.value.trim();
+        addTask(text);
         if (text) {
-            addTask(text);
             taskInput.value = '';
         }
     });
@@ -69,8 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
     taskInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             const text = taskInput.value.trim();
+            addTask(text);
             if (text) {
-                addTask(text);
                 taskInput.value = '';
             }
         }
