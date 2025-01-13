@@ -87,6 +87,22 @@ button:hover {
     background-color: var(--color-primary-dark);
 }
 
+.clear-completed-btn {
+    display: none;
+    margin: var(--spacing-md) auto;
+    background-color: var(--color-primary);
+    border: none;
+}
+
+.clear-completed-btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.task-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
 .task-item {
     display: flex;
     align-items: center;
