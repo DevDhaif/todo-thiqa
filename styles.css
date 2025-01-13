@@ -133,6 +133,33 @@ button:hover {
     border: var(--border-width) solid var(--color-danger);
 }
 
+.edit-btn {
+    background-color: var(--color-primary-darker);
+    color: var(--color-white);
+}
+
+.edit-btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.edit-input {
+    flex: 1;
+    padding: var(--spacing-xs);
+    border: var(--border-width) solid var(--color-primary);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+}
+
+.task-text {
+    flex: 1;
+    cursor: pointer;
+}
+
+.task-item.completed .task-text {
+    cursor: not-allowed;
+}
+
 .delete-btn:hover {
     background-color: var(--color-danger-hover);
 }

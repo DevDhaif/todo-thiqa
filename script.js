@@ -58,10 +58,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.className = `task-item ${task.completed ? 'completed' : ''}`;
         li.innerHTML = `
-            <span class="task-text">${task.text}</span>
-            <button class="done-btn">${task.completed ? 'Undo' : 'Mark as Done'}</button>
+            <span class="task-text" data-id="${task.id}">${task.text}</span>
+             <div class="task-buttons">
+                <button class="edit-btn">Edit</button>
+                <button class="done-btn">${task.completed ? 'Undo' : 'Mark as Done'}</button>
             <button class="delete-btn">Delete</button>
+        </div>
         `;
+
+        // edit task
+        li.querySelector('.edit-btn').addEventListener('click', () => {
+
+            const taskText = li.querySelector('.task-text');
+            const currentText = taskText.textContent;
+            taskText.innerHTML = `<input type="text" value="${currentText}">`;
+            const input = taskText.querySelector('input');
+            input.focus();
+
+            input.addEventListener('blur', finishEditing);
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') finishEditing();
+            });
+
+            function finishEditing() {
+                const newText = input.value.trim();
+                if (newText && newText !== currentText) {
+                    task.text = newText;
+                    saveTasks();
+                }
+                taskText.textContent = task.text;
+            }
+        });
 
         // mark task as done
         li.querySelector('.done-btn').addEventListener('click', (e) => {
